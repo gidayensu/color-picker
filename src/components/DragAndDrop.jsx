@@ -30,10 +30,9 @@ export default function DragAndDrop({ handleColorPick, setImageUploaded }) {
 
   return (
     <>
-      <div className="">
+      <div className="flex flex-col justify-center items-center">
         <div className="">
           <div
-            className=""
             style={{}}
             {...getRootProps()}
           >
@@ -41,7 +40,7 @@ export default function DragAndDrop({ handleColorPick, setImageUploaded }) {
               className=""
               {...getInputProps()}
             />
-            {!uploadedImage && <div className="mt-4 border-2 border-dashed border-slate-400 rounded-lg w-96 h-96 flex flex-col justify-center items-center cursor-pointer">
+            {!uploadedImage && <div className="mt-4 border-2 border-dashed border-slate-400 rounded-lg w-80 md:w-96 h-80 md:h-96 flex flex-col justify-center items-center cursor-pointer">
               <span className="flex items-center justify-center h-12 w-12 rounded-tl-lg rounded-bl-lg text-5xl"><FaFileUpload/></span>
               <p className="p-2 mt-4 font-bold">drag and drop your image file here</p>
               <p className="p-2 text-slate-400">File supported are PNG, JPG, GIF</p>
@@ -52,11 +51,12 @@ export default function DragAndDrop({ handleColorPick, setImageUploaded }) {
         </div>
         
         {uploadedImage && (
-          <div className="w-96 mt-4">
+          <div className="md:w-96 mt-4 w-80">
             <ImageColorPicker
               onColorPick={handleColorPick}
               zoom={1}
               imgSrc={uploadedImage}
+              
             />
           </div>
         )}

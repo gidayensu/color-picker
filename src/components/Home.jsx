@@ -4,6 +4,7 @@ import DragAndDrop from "./DragAndDrop.jsx";
 import Tints from "./Tints.jsx";
 import Shades from "./Shades.jsx";
 import Footer from "./Footer.jsx";
+import NavBar from "./NavBar.jsx";
 
 export default function HomeButtons() {
   
@@ -39,12 +40,12 @@ export default function HomeButtons() {
   }
 
   return (
-    <div className="">
+    <div>
+      <NavBar/>
       <div className="flex justify-center items-center text-center">
-        <p className="text-4xl w-[600px]">
-          Find the <span className="font-bold"> Tints </span> and{" "}
-          <span className="font-bold"> Shades </span> of Colour from a Colour
-          Picker or an Image
+        <p className="text-4xl w-[600px] m-">
+          Find the <span className="font-bold opacity-70"> Tints </span> and
+          <span className="font-bold"> Shades </span> of a Colour 
         </p>
       </div>
       <div className="grid justify-center justify-items-center">
@@ -65,7 +66,7 @@ export default function HomeButtons() {
         )}
         {!imageUploaded && !buttonClicked && (
           <button
-            className="bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 w-96 px-4 mt-2 h-12 rounded-lg"
+            className="bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 md:w-96 w-80 px-4 mt-2 md:h-12 h-10 rounded-lg"
             onClick={onClickHandler}
           >
             Choose Colour
@@ -87,9 +88,10 @@ export default function HomeButtons() {
           />
         )}
         {status() && (
+          <>
           <h1 className="text-center font-bold text-4xl mt-4 mb-4">COLOR</h1>
-        )}
-        {status() && (
+        
+        
           <span
             className="text-center p-8 rounded cursor-pointer"
             style={{
@@ -98,6 +100,7 @@ export default function HomeButtons() {
           >
             {color}
           </span>
+          </>
         )}
         <Tints color={color} status={status} />
         <Shades color={color} status={status} />

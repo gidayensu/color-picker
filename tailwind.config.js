@@ -6,6 +6,10 @@ export default {
   ],
   theme: {
     extend: {},
+    fontFamily: {
+      'sans': ['raleway', 'sans-serif'],
+    
+  }
   },
   plugins: [],
 }

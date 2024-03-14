@@ -1,8 +1,9 @@
+import { FaFileUpload } from "react-icons/fa";
 import { useState, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import { ImageColorPicker } from "react-image-color-picker";
 
-export default function DragAndDrop({ handleColorPick }) {
+export default function DragAndDrop({ handleColorPick, setImageUploaded }) {
   const [uploadedImage, setUpLoadedImage] = useState(null);
 
   const onDrop = useCallback((acceptedFile) => {
@@ -14,6 +15,7 @@ export default function DragAndDrop({ handleColorPick }) {
       reader.onload = () => {
         // Do whatever you want with the file contents
         setUpLoadedImage(reader.result);
+        setImageUploaded(true);
       };
       reader.readAsDataURL(file);
     });
@@ -23,39 +25,44 @@ export default function DragAndDrop({ handleColorPick }) {
 
   const handleRemovePicture = () => {
     setUpLoadedImage(null);
+    setImageUploaded(false)
   };
 
   return (
     <>
-      <div className="mb-6">
-        <div className="w-full md:w-1/2 lg:w-1/3 mx-auto my-4 p-4 border border-gray-300 rounded-lg">
+      <div className="">
+        <div className="">
           <div
-            className="block mb-2 text-sm font-medium text-gray-900"
+            className=""
             style={{}}
             {...getRootProps()}
           >
             <input
-              className="block w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+              className=""
               {...getInputProps()}
             />
-            <p className="text-center font-bold mt-2 cursor-pointer">
-              Drag and drop a file here or click to selet a file
-            </p>
+            {!uploadedImage && <div className="mt-4 border-2 border-dashed border-slate-400 rounded-lg w-96 h-96 flex flex-col justify-center items-center cursor-pointer">
+              <span className="flex items-center justify-center h-12 w-12 rounded-tl-lg rounded-bl-lg text-5xl"><FaFileUpload/></span>
+              <p className="p-2 mt-4 font-bold">drag and drop your image file here</p>
+              <p className="p-2 text-slate-400">File supported are PNG, JPG, GIF</p>
+              <p className="p-2 text-slate-600">or</p>
+              <button className="border-2 border-teal-600 h-10 w-40 rounded-md text-sm text-teal-700 font-semibold hover:bg-teal-700 hover:border-teal-700 hover:text-white"> Browse files</button>
+            </div>}
           </div>
         </div>
         
         {uploadedImage && (
-          <div className="max-h-15 max-w-15 m rounded-lg border border-white shadow-md overflow-hidden">
+          <div className="w-96 mt-4">
             <ImageColorPicker
               onColorPick={handleColorPick}
               zoom={1}
               imgSrc={uploadedImage}
             />
           </div>
-        )};
+        )}
         {uploadedImage && (
           <button
-            className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded "
+            className=""
             onClick={handleRemovePicture}
           >
             Remove Picture

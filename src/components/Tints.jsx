@@ -1,7 +1,7 @@
 import Values from "values.js";
 
 export default function Tints({ color, status }) {
-  const tints = new Values(`${color}`).tints(10);
+  const tints = new Values(`${color}`).tints(8);
   return (
     <>
       {status() && (

@@ -13,7 +13,7 @@ export default function Tints({ color }) {
             {tints.map((tint, index) => (
               <li className="bg-gray-200 text-center p-10 rounded cursor-pointer" key={index} style={{
                 backgroundColor: `#${tint.hex}`
-              }}>{`${color === '#ffff'? 'choose colour' : `'#'${tint.hex}`}`}</li>
+              }}>{`${color === '#ffff'? 'choose colour' : `#${tint.hex}`}`}</li>
             ))}
           </ul>
         </div>

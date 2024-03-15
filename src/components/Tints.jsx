@@ -4,14 +4,8 @@ import Values from "values.js";
 
 export default function Tints({ color, currentTint, copyToClipBoardHandler }) {
   
-
   const tints = new Values(`${color}`).tints(8);
   
-
-  
-  
-
-
   return (
     <>
       

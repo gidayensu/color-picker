@@ -5,6 +5,7 @@ import Tints from "./Tints.jsx";
 import Shades from "./Shades.jsx";
 import Footer from "./Footer.jsx";
 import NavBar from "./NavBar.jsx";
+import { LuCopy, LuCopyCheck } from "react-icons/lu";
 import copyToClipBoard from "./copyToClipboard.js";
 
 export default function Home() {
@@ -51,8 +52,8 @@ export default function Home() {
       <NavBar />
       <div className="flex justify-center items-center text-center">
         <p className="text-4xl w-[600px] m-8">
-          Find the <span className="font-bold opacity-70"> Tints </span> and
-          <span className="font-bold"> Shades </span> of a Colour 
+          Find and Copy the <span className="font-bold text-teal-600"> Tints </span> and
+          <span className="font-bold text-teal-700"> Shades </span> of a <span>Colour </span>
         </p>
       </div>
       <div className="grid justify-center justify-items-center">
@@ -96,12 +97,14 @@ export default function Home() {
         
         
           <span
+            onClick={()=>copyToClipBoardHandler(color)}
             className="text-center p-8 rounded cursor-pointer"
             style={{
               backgroundColor: `${color}`,
             }}
           >
             {color}
+            {color === currentShadeOrTint ? <LuCopyCheck/> : <LuCopy/>}
           </span>
           </>
         )}

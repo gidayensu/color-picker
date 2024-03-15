@@ -5,8 +5,9 @@ import Tints from "./Tints.jsx";
 import Shades from "./Shades.jsx";
 import Footer from "./Footer.jsx";
 import NavBar from "./NavBar.jsx";
+import copyToClipBoard from "./copyToClipboard.js";
 
-export default function HomeButtons() {
+export default function Home() {
   
   const initialColor = "#ffff";
 
@@ -14,14 +15,20 @@ export default function HomeButtons() {
   const [buttonClicked, setButtonClicked] = useState(false);
   const [imageUploaded, setImageUploaded] = useState(false);
 
-  const handleOnChangeComplete = (color) => {
+  
+  const [currentShadeOrTint, setcurrentShadeOrTint] = useState('');
+ 
+  const copyToClipBoardHandler = (color) => {
+    copyToClipBoard(color);
+    setcurrentShadeOrTint(color);        
+}
+
+  const handleColourChoice = (color) => {
     if(typeof(color)==='string'&& color.includes('rgb')) {
-      console.log(color)
         const rgb = color;
         const hex = '#' + rgb.slice(4,-1).split(',').map(x => (+x).toString(16).padStart(2,0)).join('');
         setColor(hex);
     } else 
-    console.log(typeof(color))
     setColor(color.hex);
   };
 
@@ -35,7 +42,7 @@ export default function HomeButtons() {
     setButtonClicked(() => !buttonClicked);
   };
 
-  const status = ()=> {
+  const colourSelected = ()=> {
     return color === initialColor ? false : true;
   }
 
@@ -53,7 +60,7 @@ export default function HomeButtons() {
           <div>
         {!buttonClicked && (
           <DragAndDrop
-            handleColorPick={handleOnChangeComplete}
+            handleColorPick={handleColourChoice}
             setImageUploaded={setImageUploaded}
           />
         )}
@@ -78,12 +85,12 @@ export default function HomeButtons() {
         {buttonClicked && (
           <ColourPicker
             color={color}
-            handleOnChangeComplete={handleOnChangeComplete}
+            handleColourChoice={handleColourChoice}
             confirm={onClickHandler}
             cancel={cancelHandler}
           />
         )}
-        {status() && (
+        {colourSelected() && (
           <>
           <h1 className="text-center font-bold text-4xl mt-4 mb-4">COLOR</h1>
         
@@ -98,8 +105,16 @@ export default function HomeButtons() {
           </span>
           </>
         )}
-        <Tints color={color}  />
-        <Shades color={color}  />
+        <Tints 
+          color={color} 
+          currentTint={currentShadeOrTint} 
+          copyToClipBoardHandler={copyToClipBoardHandler} 
+        />
+        <Shades 
+          color={color}
+          currentShade={currentShadeOrTint} 
+          copyToClipBoardHandler={copyToClipBoardHandler}  
+        />
       </div>
       <Footer />
     </div>

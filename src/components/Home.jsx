@@ -16,10 +16,12 @@ export default function HomeButtons() {
 
   const handleOnChangeComplete = (color) => {
     if(typeof(color)==='string'&& color.includes('rgb')) {
+      console.log(color)
         const rgb = color;
         const hex = '#' + rgb.slice(4,-1).split(',').map(x => (+x).toString(16).padStart(2,0)).join('');
         setColor(hex);
     } else 
+    console.log(typeof(color))
     setColor(color.hex);
   };
 
@@ -27,9 +29,7 @@ export default function HomeButtons() {
     setButtonClicked(() => !buttonClicked);
   };
 
-  // const confirm = ()=> {
-
-  // }
+  
   const cancelHandler = () => {
     
     setButtonClicked(() => !buttonClicked);
@@ -41,9 +41,9 @@ export default function HomeButtons() {
 
   return (
     <div>
-      <NavBar/>
+      <NavBar />
       <div className="flex justify-center items-center text-center">
-        <p className="text-4xl w-[600px] m-">
+        <p className="text-4xl w-[600px] m-8">
           Find the <span className="font-bold opacity-70"> Tints </span> and
           <span className="font-bold"> Shades </span> of a Colour 
         </p>
@@ -73,11 +73,7 @@ export default function HomeButtons() {
           </button>
         )}
         </div>
-        {/* <div className="mt-2  ">
-          <img className="w-[625px] rounded-xl border-8 border-black " src="https://cdn.dribbble.com/userupload/9642219/file/original-bbc14076ab83a19936f1fef39fe57024.gif" alt="image of bouncing colour balls" loop/>
-
-          <img className="w-[300px] absolute top-64 right-44 rounded-xl border-8 border-black " src="https://cdn.dribbble.com/userupload/4144040/file/original-97cbc563585cfbecff918e0c19b08f11.gif" alt="image of bouncing colour balls" loop/>
-        </div> */}
+        
         </div>
         {buttonClicked && (
           <ColourPicker
@@ -102,8 +98,8 @@ export default function HomeButtons() {
           </span>
           </>
         )}
-        <Tints color={color} status={status} />
-        <Shades color={color} status={status} />
+        <Tints color={color}  />
+        <Shades color={color}  />
       </div>
       <Footer />
     </div>

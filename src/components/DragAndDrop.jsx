@@ -43,7 +43,7 @@ export default function DragAndDrop({ handleColorPick, setImageUploaded }) {
             {!uploadedImage && <div className="mt-4 border-2 border-dashed border-slate-400 rounded-lg w-80 md:w-96 h-80 md:h-96 flex flex-col justify-center items-center cursor-pointer">
               <span className="flex items-center justify-center h-12 w-12 rounded-tl-lg rounded-bl-lg text-5xl"><FaFileUpload/></span>
               <p className="p-2 mt-4 font-bold">drag and drop your image file here</p>
-              <p className="p-2 text-slate-400">File supported are PNG, JPG, GIF</p>
+              <p className="p-2 text-slate-400">Files supported are PNG, JPG, GIF</p>
               <p className="p-2 text-slate-600">or</p>
               <button className="border-2 border-teal-600 h-10 w-40 rounded-md text-sm text-teal-700 font-semibold hover:bg-teal-700 hover:border-teal-700 hover:text-white"> Browse files</button>
             </div>}
@@ -62,10 +62,10 @@ export default function DragAndDrop({ handleColorPick, setImageUploaded }) {
         )}
         {uploadedImage && (
           <button
-            className=""
+            className="h-12 border w-40 mt-4 rounded-lg bg-teal-600 hover:bg-teal-700 text-white "
             onClick={handleRemovePicture}
           >
-            Remove Picture
+            Remove Picture 
           </button>
         )}
       </div>

@@ -19,7 +19,7 @@ export default function Shades({ color, currentShade, copyToClipBoardHandler  })
           <ul className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-4">
             {tints.map((shade, index) => (
               <div key={index} className="flex items-center justify-center">
-                {`#${shade.hex}` === currentShade ? <span className={`bg-white w-20 absolute mb-24 rounded-full text-center text-[#${shade.hex}] text-sm`}>copied</span>: ''}
+                {color!=="#ffff" && `#${shade.hex}` === currentShade ? <span className={`bg-white w-20 absolute mb-24 rounded-full text-center text-[#${shade.hex}] text-sm`}>copied</span>: ''}
                 
               <li onClick={()=>copyToClipBoardHandler(`#${shade.hex}`)} className="bg-gray-200 text-center rounded text-white cursor-pointer text-[17px] flex flex-col gap-4 items-center justify-center p-10"  style={{
                 backgroundColor: `#${shade.hex}`

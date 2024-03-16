@@ -14,7 +14,7 @@ export default function Tints({ color, currentTint, copyToClipBoardHandler }) {
           <ul className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-4">
             {tints.map((tint, index) => (
               <div key={index} className="flex items-center justify-center">
-                {`#${tint.hex}` === currentTint ? <span className="bg-black w-20 absolute mb-24 rounded-full text-center text-white text-sm">copied</span>: ''}
+                {color!=="#ffff" && `#${tint.hex}` === currentTint ? <span className="bg-black w-20 absolute mb-24 rounded-full text-center text-white text-sm">copied</span>: ''}
                 
               <li onClick={()=>copyToClipBoardHandler(`#${tint.hex}`)} className="bg-gray-200 text-center rounded text-black cursor-pointer text-[17px] flex flex-col gap-4 items-center justify-center p-10"  style={{
                 backgroundColor: `#${tint.hex}`

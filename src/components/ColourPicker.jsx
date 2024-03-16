@@ -10,13 +10,13 @@ export default function ColourPicker ({color, handleColourChoice, cancel}) {
                 disableAlpha  
                 onChangeComplete={handleColourChoice} 
             />
-            
+           <div className='md:block hidden'>
             <SwatchesPicker 
                 color = {color} 
                 disableAlpha  
                 onChangeComplete={handleColourChoice} 
             />
-
+            </div> 
             <button className="bg-teal-500 hover:bg-teal-700 h-10 w-20 text-white font-bold px-5 rounded mr-2 text-sm" onClick={cancel}>
                 Close
             </button>

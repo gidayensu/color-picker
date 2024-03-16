@@ -39,13 +39,11 @@ export default function DragAndDrop() {
   return (
     <>
       <div className="flex flex-col justify-center items-center">
-        <div className="">
           <div
             style={{}}
             {...getRootProps()}
           >
             <input
-              className=""
               {...getInputProps()}
             />
             {!uploadedImage && <div> 
@@ -68,7 +66,7 @@ export default function DragAndDrop() {
               </div>
             }
           </div>
-        </div>
+        
         
         {uploadedImage && (
           <div className="md:w-96 mt-4 w-80">

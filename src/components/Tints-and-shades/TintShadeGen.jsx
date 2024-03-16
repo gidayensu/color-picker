@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { TintShadyContext } from "../../store/tint-shady-context-provider";
 
 export default function TintShadeGenerator( {typeOfVariation} ) {
-  const {color, shadeOrTint, copyColor}  = useContext(TintShadyContext)
+  const {initialColor, color, shadeOrTint, copyColor}  = useContext(TintShadyContext)
   const tints = new Values(`${color}`).tints(8);
   const shades = new Values(`${color}`).shades(8);
     let currentVariation = null;
@@ -33,10 +33,10 @@ export default function TintShadeGenerator( {typeOfVariation} ) {
               <li onClick={()=>copyColor(`#${variation.hex}`)} className={`bg-gray-200 text-center rounded ${variationShade ? 'text-white': 'text-black'} cursor-pointer text-[17px] flex flex-col gap-5 items-center justify-center p-8`}  style={{
                 backgroundColor: `#${variation.hex}`
               }}>
-                {color !== '#ffff' && <span>             
+                {color !== initialColor && <span>             
                 {`#${variation.hex}` === shadeOrTint ? <LuCopyCheck/> : <LuCopy/>}
                 </span>}
-                {<span className="">{color === '#ffff'? 'choose colour' : `#${variation.hex}`}</span>}
+                {<span >{color === initialColor? 'choose colour' : `#${variation.hex}`}</span>}
               
               </li>
               </div>

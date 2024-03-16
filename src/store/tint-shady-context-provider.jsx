@@ -2,6 +2,7 @@ import { createContext, useState } from "react";
 import copyToClipBoard from "../components/common/copyToClipboard";
 
 export const TintShadyContext = createContext({
+    initialColor: '',
     color: '',
     shadeOrTint: '',
     choosingColor: true,
@@ -17,7 +18,7 @@ export const TintShadyContext = createContext({
 
 export default function TintShadyContextProvider ({children}) {
 
-    const initialColor = "#ffff";
+  const initialColor = "#ffff";
 
   const [color, setColor] = useState(initialColor);
   const [choosingColor, setChoosingColor] = useState(false);
@@ -52,13 +53,14 @@ export default function TintShadyContextProvider ({children}) {
 }
 
 const contextValue = {
-    color: color,
+    initialColor,
+    color,
     shadeOrTint: currentShadeOrTint,
-    choosingColor: choosingColor,
-    imageUploaded: imageUploaded,
+    choosingColor,
+    imageUploaded,
     colorChoice: colorChoiceHandler,
-    colorSelected: colorSelected,
-    choosingColorHandler: choosingColorHandler,
+    colorSelected,
+    choosingColorHandler,
     imageUploadStatus: imageUploadedHandler,
     copyColor: copyToClipBoardHandler
 }

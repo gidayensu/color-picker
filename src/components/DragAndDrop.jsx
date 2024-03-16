@@ -44,13 +44,25 @@ export default function DragAndDrop({ handleColorPick, setImageUploaded }) {
               className=""
               {...getInputProps()}
             />
-            {!uploadedImage && <div className="mt-4 border-2 border-dashed border-slate-400 rounded-lg w-80 md:w-96 h-80 md:h-96 flex flex-col justify-center items-center cursor-pointer">
+            {!uploadedImage && <div> 
+              
+              <div className="hidden mt-4 border-2 border-dashed border-slate-400 rounded-lg w-80 md:w-96 h-80 md:h-96 md:flex flex-col justify-center items-center cursor-pointer">
               <span className="flex items-center justify-center h-12 w-12 rounded-tl-lg rounded-bl-lg text-5xl"><FaFileUpload/></span>
               <p className="p-2 mt-4 font-bold">drag and drop your image file here</p>
               <p className="p-2 text-slate-400">Files supported are PNG, JPG, GIF</p>
               <p className="p-2 text-slate-600">or</p>
               <button className="border-2 border-teal-600 h-10 w-40 rounded-md text-sm text-teal-700 font-semibold hover:bg-teal-700 hover:border-teal-700 hover:text-white"> Browse files</button>
-            </div>}
+            </div>
+            <div className="flex flex-row md:hidden">
+              <div className="flex justify-center items-center w-52 border-2 border-teal-700  h-12 text-sm font-bold text-teal-700 text-opacity-70 rounded-l-lg">
+                  <p>Upload image </p>
+              </div>
+              <button className="flex justify-center items-center text-2xl border-r-2 border-y-2 border-teal-700 w-12 text-teal-700 rounded-r-lg">
+                <FaFileUpload/>
+              </button>
+            </div>
+              </div>
+            }
           </div>
         </div>
         

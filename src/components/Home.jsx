@@ -50,9 +50,9 @@ export default function Home() {
     <>
       
       <div className="flex justify-center items-center text-center">
-        <p className="text-4xl w-[600px] m-8">
-          Find and Copy the <span className="font-bold text-teal-600"> Tints </span> and
-          <span className="font-bold text-teal-700"> Shades </span> of a <span>Colour </span>
+        <p className="md:text-4xl w-[600px] m-8 text-2xl">
+          <span className="font-bold text-teal-600"> Tints </span> and
+          <span className="font-bold text-teal-700"> Shades </span> of a <span>Color </span>
         </p>
       </div>
       <div className="grid justify-center justify-items-center">
@@ -73,7 +73,7 @@ export default function Home() {
         )}
         {!imageUploaded && !buttonClicked && (
           <button
-            className="bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 md:w-96 w-80 px-4 mt-2 md:h-12 h-10 rounded-lg"
+            className="bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 md:w-96 w-64 px-4 mt-2 md:h-12 h-10 rounded-lg "
             onClick={onClickHandler}
           >
             Choose Colour

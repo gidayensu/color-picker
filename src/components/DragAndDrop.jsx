@@ -5,7 +5,7 @@ import { ImageColorPicker } from "react-image-color-picker";
 
 export default function DragAndDrop({ handleColorPick, setImageUploaded }) {
   const [uploadedImage, setUpLoadedImage] = useState(null);
-
+  console.log('drag and drop')
   const onDrop = useCallback((acceptedFile) => {
     acceptedFile.forEach((file) => {
       const reader = new FileReader();

@@ -3,8 +3,7 @@ import ColourPicker from "./ColourPicker.jsx";
 import DragAndDrop from "./DragAndDrop.jsx";
 import Tints from "./Tints.jsx";
 import Shades from "./Shades.jsx";
-import Footer from "./Footer.jsx";
-import NavBar from "./NavBar.jsx";
+
 import { LuCopy, LuCopyCheck } from "react-icons/lu";
 import copyToClipBoard from "./copyToClipboard.js";
 
@@ -48,8 +47,8 @@ export default function Home() {
   }
 
   return (
-    <div>
-      <NavBar />
+    <>
+      
       <div className="flex justify-center items-center text-center">
         <p className="text-4xl w-[600px] m-8">
           Find and Copy the <span className="font-bold text-teal-600"> Tints </span> and
@@ -119,7 +118,7 @@ export default function Home() {
           copyToClipBoardHandler={copyToClipBoardHandler}  
         />
       </div>
-      <Footer />
-    </div>
+
+    </>
   );
 }

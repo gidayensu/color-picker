@@ -22,9 +22,9 @@ export default function DragAndDrop({ handleColorPick, setImageUploaded }) {
 
   const { getRootProps, getInputProps } = useDropzone({ 
     accept: {
-      'image/png': ['.png'],
-      'image/jpeg': ['.jpeg'],
-      'image/jpg': ['.jpg']
+      'image/png': [],
+      'image/jpeg': [],
+      
   }, onDrop });
 
   const handleRemovePicture = () => {

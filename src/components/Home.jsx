@@ -1,51 +1,14 @@
-import { useState } from "react";
 import ColorPicker from "./color-pickers/ColorPicker.jsx";
 import DragAndDrop from "./color-pickers/DragAndDrop.jsx";
 import Tints from "./Tints-and-shades/Tints.jsx";
 import Shades from "./Tints-and-shades/Shades.jsx";
-
+import { useContext } from "react";
+import { TintShadyContext } from "../store/tint-shady-context-provider.jsx";
 import { LuCopy, LuCopyCheck } from "react-icons/lu";
-import copyToClipBoard from "./common/copyToClipboard.js";
+
 
 export default function Home() {
-  
-  const initialColor = "#ffff";
-
-  const [color, setColor] = useState(initialColor);
-  const [choosingColor, setChoosingColor] = useState(false);
-  const [imageUploaded, setImageUploaded] = useState(false);
-
-  
-  const [currentShadeOrTint, setcurrentShadeOrTint] = useState('');
- 
-  const copyToClipBoardHandler = (color) => {
-    copyToClipBoard(color);
-    setcurrentShadeOrTint(color);        
-}
-
-  const colorChoiceHandler = (color) => {
-    if(typeof(color)==='string'&& color.includes('rgb')) {
-        const rgb = color;
-        const hex = '#' + rgb.slice(4,-1).split(',').map(x => (+x).toString(16).padStart(2,0)).join('');
-        setColor(hex);
-    } else 
-    setColor(color.hex);
-  };
-
-  const choosingColorHandler = () => {
-    setChoosingColor(() => !choosingColor);
-  };
-
-  
-  const endChoosingColorHandler = () => {
-    
-    setChoosingColor(() => !choosingColor);
-  };
-
-  const colorSelected = ()=> {
-    return color === initialColor ? false : true;
-  }
-
+  const {color, choosingColor, imageUploaded, choosingColorHandler, colorSelected, shadeOrTint, copyColor} = useContext(TintShadyContext);
   return (
     <>
       
@@ -59,10 +22,7 @@ export default function Home() {
         <div className="flex flex-col md:flex-row justify-center items-center gap-10">
           <div>
         {!choosingColor && (
-          <DragAndDrop
-            handleColorPick={colorChoiceHandler}
-            setImageUploaded={setImageUploaded}
-          />
+          <DragAndDrop />
         )}
         {!choosingColor && !imageUploaded && (
           <div className="flex gap-3 items-center justify-center mt-2">
@@ -83,8 +43,7 @@ export default function Home() {
         
         </div>
         {choosingColor && (
-          <ColorPicker
-          />
+          <ColorPicker/>
         )}
         {colorSelected() && (
           <>
@@ -92,27 +51,19 @@ export default function Home() {
         
         
           <span
-            onClick={()=>copyToClipBoardHandler(color)}
+            onClick={()=>copyColor(color)}
             className="text-center p-8 rounded cursor-pointer"
             style={{
               backgroundColor: `${color}`,
             }}
           >
             {color}
-            {color === currentShadeOrTint ? <LuCopyCheck/> : <LuCopy/>}
+            {color === shadeOrTint ? <LuCopyCheck/> : <LuCopy/>}
           </span>
           </>
         )}
-        <Tints 
-          color={color} 
-          currentTint={currentShadeOrTint} 
-          copyToClipBoardHandler={copyToClipBoardHandler} 
-        />
-        <Shades 
-          color={color}
-          currentShade={currentShadeOrTint} 
-          copyToClipBoardHandler={copyToClipBoardHandler}  
-        />
+        <Tints />
+        <Shades/>
       </div>
 
     </>

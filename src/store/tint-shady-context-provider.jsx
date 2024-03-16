@@ -4,9 +4,12 @@ import copyToClipBoard from "../components/common/copyToClipboard";
 export const TintShadyContext = createContext({
     color: '',
     shadeOrTint: '',
+    choosingColor: true,
+    imageUploaded: false,
     colorChoice: ()=>{},
     colorSelected: ()=>{},
-    choosingColor: ()=>{},
+    choosingColorHandler: ()=>{},
+    imageUploadStatus: ()=>{},
     copyColor: ()=>{},
 }
 );
@@ -39,6 +42,9 @@ export default function TintShadyContextProvider ({children}) {
     setChoosingColor(() => !choosingColor);
   };
 
+  const imageUploadedHandler = ()=> {
+    setImageUploaded(()=>!imageUploaded)
+  }
 
   const copyToClipBoardHandler = (color) => {
     copyToClipBoard(color);
@@ -48,9 +54,12 @@ export default function TintShadyContextProvider ({children}) {
 const contextValue = {
     color: color,
     shadeOrTint: currentShadeOrTint,
+    choosingColor: choosingColor,
+    imageUploaded: imageUploaded,
     colorChoice: colorChoiceHandler,
     colorSelected: colorSelected,
-    choosingColor: choosingColorHandler,
+    choosingColorHandler: choosingColorHandler,
+    imageUploadStatus: imageUploadedHandler,
     copyColor: copyToClipBoardHandler
 }
   return <TintShadyContext.Provider value = {contextValue}>

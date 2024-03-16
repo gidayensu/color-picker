@@ -2,8 +2,12 @@ import { FaFileUpload } from "react-icons/fa";
 import { useState, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import { ImageColorPicker } from "react-image-color-picker";
+import { useContext } from "react";
+import { TintShadyContext } from "../../store/tint-shady-context-provider";
 
-export default function DragAndDrop({ handleColorPick, setImageUploaded }) {
+export default function DragAndDrop() {
+  const {colorChoice, imageUploadStatus} = useContext(TintShadyContext);
+
   const [uploadedImage, setUpLoadedImage] = useState(null);
   const onDrop = useCallback((acceptedFile) => {
     acceptedFile.forEach((file) => {
@@ -14,7 +18,7 @@ export default function DragAndDrop({ handleColorPick, setImageUploaded }) {
       reader.onload = () => {
         // Do whatever you want with the file contents
         setUpLoadedImage(reader.result);
-        setImageUploaded(true);
+        imageUploadStatus(true);
       };
       reader.readAsDataURL(file);
     });
@@ -29,7 +33,7 @@ export default function DragAndDrop({ handleColorPick, setImageUploaded }) {
 
   const handleRemovePicture = () => {
     setUpLoadedImage(null);
-    setImageUploaded(false)
+    imageUploadStatus(false)
   };
 
   return (
@@ -69,7 +73,7 @@ export default function DragAndDrop({ handleColorPick, setImageUploaded }) {
         {uploadedImage && (
           <div className="md:w-96 mt-4 w-80">
             <ImageColorPicker
-              onColorPick={handleColorPick}
+              onColorPick={colorChoice}
               zoom={1}
               imgSrc={uploadedImage}
               

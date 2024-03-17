@@ -65,13 +65,13 @@ export default function Home() {
           <ColorPicker/>
         )}
         {colorSelected() && (
-          <>
+          <div className="flex flex-col justify-center items-center">
           <h1 className="text-center font-bold text-4xl mt-4 mb-4">COLOR</h1>
         
         
           <span
             onClick={()=>copyColor(color)}
-            className="text-center p-8 rounded cursor-pointer"
+            className="text-center p-8 rounded cursor-pointer w-32"
             style={{
               backgroundColor: `${color}`,
             }}
@@ -79,7 +79,7 @@ export default function Home() {
             {color}
             {color === shadeOrTint ? <LuCopyCheck/> : <LuCopy/>}
           </span>
-          </>
+          </div>
         )}
         <Tints />
         <Shades/>

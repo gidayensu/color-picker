@@ -8,7 +8,8 @@ import { LuCopy, LuCopyCheck } from "react-icons/lu";
 
 
 export default function Home() {
-  const {color, choosingColor, imageUploaded, choosingColorHandler, colorSelected, shadeOrTint, copyColor} = useContext(TintShadyContext);
+  const {color, choosingColor, imageUploaded, choosingColorHandler, colorSelected, shadeOrTint, colorChoice, copyColor, wrongColor} = useContext(TintShadyContext);
+  
   return (
     <>
       
@@ -18,7 +19,7 @@ export default function Home() {
           <span className="font-bold text-teal-700"> Shades </span> of a <span>Color </span>
         </p>
       </div>
-      <div className="grid justify-center justify-items-center">
+      <div className="grid justify-center items-center">
         <div className="flex flex-col md:flex-row justify-center items-center gap-10">
           <div>
         {!choosingColor && (
@@ -32,12 +33,30 @@ export default function Home() {
           </div>
         )}
         {!imageUploaded && !choosingColor && (
-          <button
-            className="bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 md:w-96 w-64 px-4 mt-2 md:h-12 h-10 rounded-lg "
-            onClick={choosingColorHandler}
-          >
-            Choose Color
-          </button>
+          <div className="flex flex-wrap justify-center items-center mt-2 gap-4 ">
+              <button
+                className="bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 md:w-96 w-64 px-4  md:h-12 h-10 rounded-lg "
+                onClick={choosingColorHandler}
+              >
+                Choose Color
+              </button>
+              <div className="flex flex-col mb-5 md:mb-0">
+              <input type="text" className={` ${wrongColor ? 'border-2 border-red-500' : 'border-2'} mt-4 md:mt-0 active:border-slate-400 h-12 w-64 rounded-lg p-5 tracking-widest`} defaultValue={color} placeholder="enter a colour code" onChange={(event)=>colorChoice(event.target.value)}/>
+              {wrongColor && 
+                <div className="md:-mt-[25px] mt-[70px]  absolute flex flex-row"> 
+                    <div className="w-1 h-5 bg-red-500">
+                    </div>
+                    <div className="flex items-center w-48 h-5 bg-red-200 text-[12px] text-red-500 font-bold tracking-wide p-2">
+                      <p>enter a correct color code</p>
+                    </div>
+                </div>}
+                </div>
+              <div className="hidden rounded-full w-12 h-12 shadow-sm" style={{
+                backgroundColor: `${color}`
+              }}>
+                
+              </div>
+          </div>
         )}
         </div>
         

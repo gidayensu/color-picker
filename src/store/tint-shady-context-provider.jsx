@@ -9,33 +9,45 @@ export const TintShadyContext = createContext(null);
 export default function TintShadyContextProvider ({children}) {
 
   const initialColor = "#ffff";
-
-  const [color, setColor] = useState(initialColor);
-  const [choosingColor, setChoosingColor] = useState(false);
+  
+  const [colorDetails, setColorDetails] = useState ({
+    color: initialColor,
+    choosingColor: false,
+    currentShadeOrTint: '', 
+    tintShadePercent: 8,
+    wrongColor: false
+  })
   const [imageUploaded, setImageUploaded] = useState(false); 
-  const [currentShadeOrTint, setcurrentShadeOrTint] = useState('');
-  const [tintShadePercent, setTintShadePercent] = useState(8);
-  const [wrongColor, setWrongColor] = useState(false);
+  // const [color, setColor] = useState(initialColor);
+  // const [choosingColor, setChoosingColor] = useState(false);
+  
+  // const [currentShadeOrTint, setcurrentShadeOrTint] = useState('');
+  // const [tintShadePercent, setTintShadePercent] = useState(8);
+  // const [wrongColor, setWrongColor] = useState(false);
   
   
   
  
   const colorChoiceHandler = (color) => {
+    
     if(typeof(color)==='string'&& color.includes('rgb')) {
         const rgb = color;
         const hex = '#' + rgb.slice(4,-1).split(',').map(x => (+x).toString(16).padStart(2,0)).join('');
-        setColor(hex);
+        setColorDetails(prevColorDetails=>({...prevColorDetails, color: hex}))  
     } else {
         
         if(color.hex) {
-        setColor(color.hex)
+        setColorDetails(prevColorDetails=>({...prevColorDetails, color: color.hex})) 
 } else {
     if (HEX_REGEX.test(color)) {
-        setWrongColor(false);
-        color.includes('#') ? setColor(color) : setColor('#'+color)
+      setColorDetails(prevColorDetails=>({...prevColorDetails, color: color})) 
+        color.includes('#') ? 
+        setColorDetails(prevColorDetails=>({...prevColorDetails, color: color}))  
+        : 
+        setColorDetails(prevColorDetails=>({...prevColorDetails, color: '#'+color})) 
         
     } else {
-        setWrongColor(true);
+      setColorDetails(prevColorDetails=>({...prevColorDetails, wrongColor: true}))  
     }
      
       
@@ -44,11 +56,12 @@ export default function TintShadyContextProvider ({children}) {
   };
 
   const colorSelected = ()=> {
-    return color === initialColor ? false : true;
+    return colorDetails.color === initialColor ? false : true;
   }
 
   const choosingColorHandler = () => {
-    setChoosingColor(() => !choosingColor);
+    setColorDetails(prevColorDetails=> ({
+      ...prevColorDetails, choosingColor: !colorDetails.choosingColor}))
   };
 
   const imageUploadedHandler = ()=> {
@@ -57,28 +70,27 @@ export default function TintShadyContextProvider ({children}) {
 
   const copyToClipBoardHandler = (color) => {
     copyToClipBoard(color);
-    setcurrentShadeOrTint(color);        
+    setColorDetails(prevColorDetails=> ({
+      ...prevColorDetails, currentShadeOrTint: color}))
 }
 
   const tintShadePercentHandler = (percent) => {
     const numberPercent = parseFloat(percent)
-    setTintShadePercent(numberPercent);
+    setColorDetails(prevColorDetails=> ({
+      ...prevColorDetails, tintShadePercent: numberPercent}))
     
 }
     
     
 const wrongColorHandler = (wrongColorStatus)=> {
-    setWrongColor(wrongColorStatus)
+  setColorDetails(prevColorDetails=> ({
+    ...prevColorDetails, wrongColor: wrongColorStatus}))
 }
 
 const contextValue = {
     initialColor,
-    color,
-    currentShadeOrTint,
-    choosingColor,
     imageUploaded,
-    wrongColor,
-    tintShadePercent,
+    colorDetails,
     colorChoice: colorChoiceHandler,
     colorSelected,
     choosingColorHandler,

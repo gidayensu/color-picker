@@ -3,18 +3,18 @@ import { useContext } from 'react';
 import { TintShadyContext } from '../../store/tint-shady-context-provider';
 
 export default function ColorPicker () {
-    const {color, colorChoice, choosingColorHandler} = useContext(TintShadyContext);
+    const {colorDetails, colorChoice, choosingColorHandler} = useContext(TintShadyContext);
     
     return (
     <>  <div className="flex justify-center flex-col md:flex-row items-center gap-3 ">
             <SketchPicker 
-                color = {color} 
+                color = {colorDetails.color} 
                 
                 onChangeComplete={colorChoice} 
             />
            <div className='md:block hidden'>
             <SwatchesPicker 
-                color = {color} 
+                color = {colorDetails.color} 
                 
                 onChangeComplete={colorChoice} 
             />

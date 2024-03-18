@@ -8,7 +8,7 @@ import { LuCopy, LuCopyCheck } from "react-icons/lu";
 
 
 export default function Home() {
-  const {color, choosingColor, imageUploaded, choosingColorHandler, colorSelected, shadeOrTint, colorChoice, copyColor, wrongColor} = useContext(TintShadyContext);
+  const {initialColor, color, choosingColor, imageUploaded, choosingColorHandler, colorSelected, currentShadeOrTint, tintShadePercentHandler, colorChoice, copyToClipBoardHandler, wrongColor, tintShadePercent} = useContext(TintShadyContext);
   
   return (
     <>
@@ -35,21 +35,24 @@ export default function Home() {
         {!imageUploaded && !choosingColor && (
           <div className="flex flex-wrap justify-center items-center mt-2 gap-4 ">
               <button
-                className="bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 md:w-96 w-64 px-4  md:h-12 h-10 rounded-lg "
+                className="bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 md:w-80 w-64 px-4  md:h-12 h-10 rounded-lg"
                 onClick={choosingColorHandler}
               >
                 Choose Color
               </button>
-              <div className="flex flex-col mb-5 md:mb-0">
-              <input type="text" className={` ${wrongColor ? 'border-2 border-red-500' : 'border-2'} mt-4 md:mt-0 active:border-slate-400 h-12 w-64 rounded-lg p-5 tracking-widest`} defaultValue={color} placeholder="enter a colour code" onChange={(event)=>colorChoice(event.target.value)}/>
+              <div className="flex flex-row mb-5 md:mb-0 justify-center items-center  gap-3">
+              <input type="text" className={` ${wrongColor ? 'border-2 border-red-500' : 'border-2 border-teal-700'} mt-4 md:mt-0  h-12 w-52 rounded-lg p-5 tracking-widest`} defaultValue={color===initialColor ? "enter colour code" : color} placeholder="enter a colour code" onChange={(event)=>colorChoice(event.target.value)}/>
               {wrongColor && 
-                <div className="md:-mt-[25px] mt-[70px]  absolute flex flex-row"> 
+                <div className="md:-mt-[25px] mt-[95px] md:mr-0 mr-20  absolute flex flex-row"> 
                     <div className="w-1 h-5 bg-red-500">
                     </div>
-                    <div className="flex items-center w-48 h-5 bg-red-200 text-[12px] text-red-500 font-bold tracking-wide p-2">
-                      <p>enter a correct color code</p>
+                    <div className="flex items-center w-50 h-5 bg-red-200 text-[12px] text-red-500 font-bold tracking-wide p-2">
+                      <p>enter a correct hex color code</p>
                     </div>
                 </div>}
+                <input placeholder="%" defaultValue={`${tintShadePercent}%`} className=" text-center text-sm mt-4 w-16 h-12 rounded-lg border-2 border-teal-700" type="number" onChange={(event)=>tintShadePercentHandler(event.target.value)}/>
+
+                
                 </div>
               <div className="hidden rounded-full w-12 h-12 shadow-sm" style={{
                 backgroundColor: `${color}`
@@ -70,14 +73,14 @@ export default function Home() {
         
         
           <span
-            onClick={()=>copyColor(color)}
+            onClick={()=>copyToClipBoardHandler(color)}
             className="text-center p-8 rounded cursor-pointer w-32"
             style={{
               backgroundColor: `${color}`,
             }}
           >
             {color}
-            {color === shadeOrTint ? <LuCopyCheck/> : <LuCopy/>}
+            {color === currentShadeOrTint ? <LuCopyCheck/> : <LuCopy/>}
           </span>
           </div>
         )}

@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { TintShadyContext } from "../../store/tint-shady-context-provider";
 
 export default function DragAndDrop() {
-  const {colorChoice, imageUploadStatus} = useContext(TintShadyContext);
+  const {colorChoice, imageUploadedHandler} = useContext(TintShadyContext);
 
   const [uploadedImage, setUpLoadedImage] = useState(null);
   const onDrop = useCallback((acceptedFile) => {
@@ -18,7 +18,7 @@ export default function DragAndDrop() {
       reader.onload = () => {
         // Do whatever you want with the file contents
         setUpLoadedImage(reader.result);
-        imageUploadStatus(true);
+        imageUploadedHandler(true);
       };
       reader.readAsDataURL(file);
     });
@@ -33,7 +33,7 @@ export default function DragAndDrop() {
 
   const handleRemovePicture = () => {
     setUpLoadedImage(null);
-    imageUploadStatus(false)
+    imageUploadedHandler(false)
   };
 
   return (
@@ -83,7 +83,7 @@ export default function DragAndDrop() {
             className="h-12 border w-40 mt-4 rounded-lg bg-teal-600 hover:bg-teal-700 text-white "
             onClick={handleRemovePicture}
           >
-            Remove Picture 
+            Remove Image 
           </button>
         )}
       </div>

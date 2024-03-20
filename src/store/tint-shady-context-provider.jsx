@@ -15,7 +15,7 @@ export default function TintShadyContextProvider ({children}) {
     choosingColor: false,
     currentShadeOrTint: '', 
     tintShadePercent: 8,
-    wrongColor: false
+    wrongColor: null
   })
   const [imageUploaded, setImageUploaded] = useState(false); 
   // const [color, setColor] = useState(initialColor);

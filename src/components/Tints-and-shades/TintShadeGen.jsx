@@ -49,7 +49,7 @@ export default function TintShadeGenerator( {typeOfVariation} ) {
               }}>
                 {colorDetails.color !== initialColor && 
                 <div className="flex flex-row flex-nowrap gap-4 text-2xl cursor-pointer">             
-                    {`#${variation.hex}` === colorDetails.currentShadeOrTint ? <LuCopyCheck/> : <LuCopy  onClick={()=>copyToClipBoardHandler(`#${variation.hex}`)}/>}
+                    {`#${variation.hex}` === colorDetails.currentShadeOrTint ? <LuCopyCheck className="hover:bg-black hover-w-12"/> : <div> <LuCopy  onClick={()=>copyToClipBoardHandler(`#${variation.hex}`)}/> </div>}
                     <HiOutlineEyeDropper onClick={()=>colorChoice(variation.hex)}/>
                 </div>
                 }

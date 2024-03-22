@@ -9,18 +9,29 @@ import { LuCopy, LuCopyCheck } from "react-icons/lu";
 
 
 export default function Home() {
+  const [wrongPercent, setWrongPercent] = useState(false)
   const {
     
     imageUploaded,
     colorDetails, 
     choosingColorHandler, 
-    colorSelected, 
     tintShadePercentHandler, 
     colorChoice, 
     copyToClipBoardHandler, 
     } = useContext(TintShadyContext);
 
 
+    const tintShadePercentCheck = (e)=> {
+      const convertedString = parseFloat(e.target.value);
+      
+      if (convertedString && (convertedString <= 100 && convertedString >=1)) {
+        console.log(convertedString)
+        tintShadePercentHandler(convertedString)
+        setWrongPercent(false)
+      } else {
+        setWrongPercent(true)
+      }
+    }
   
   return (
     <>
@@ -55,7 +66,7 @@ export default function Home() {
               <div className="flex flex-row mb-5 md:mb-0 justify-center items-center  gap-3">
               <input type="text" className={` ${colorDetails.wrongColor ? 'border-2 border-red-500' : 'border-2 border-teal-700'} mt-4 md:mt-0  h-12 w-52 rounded-lg p-5 tracking-widest`} defaultValue={colorDetails.color} placeholder="enter a color code" onChange={(event)=>colorChoice(event.target.value)}/>
               {colorDetails.wrongColor && 
-                <div className="md:-mt-[25px] mt-[95px] md:mr-0 mr-20  absolute flex flex-row"> 
+                <div className="md:mb-4 mt-[95px] md:mr-36 mr-30  absolute flex flex-row"> 
                     <div className="w-1 h-5 bg-red-500">
                     </div>
                     <div className="flex items-center w-50 h-5 bg-red-200 text-[12px] text-red-500 font-bold tracking-wide p-2">
@@ -63,8 +74,16 @@ export default function Home() {
                     </div>
                 </div>}
                 
-                <input value={colorDetails.tintShadePercent+'%'} className="text-center text-sm mt-4 md:w-32 w-16 h-12 rounded-lg border-2 border-teal-700" type="number" onChange={(event)=>tintShadePercentHandler(event.target.value)}/>
+                <input placeholder={colorDetails.tintShadePercent +'%'} defaultValue={colorDetails.tintShadePercent+'%'} className={`text-center text-sm mt-4 md:mt-0 md:w-32 w-16 h-12 rounded-lg border-2 ${wrongPercent ? 'border-2 border-red-500' : 'border-2 border-teal-700'} `}type="number" maxLength="3" onChange={tintShadePercentCheck }/>
 
+                {wrongPercent && 
+                <div className="md:mb-4 mt-[95px] md:ml-40 ml-52 -mr-2 absolute flex flex-row"> 
+                    <div className="w-1 h-5 bg-red-500">
+                    </div>
+                    <div className="flex items-center w-50 h-5 bg-red-200 text-[12px] text-red-500 font-bold tracking-wide p-2">
+                      <p>1 - 100</p>
+                    </div>
+                </div>}
                 
                 
                 </div>
@@ -83,7 +102,7 @@ export default function Home() {
         )}
         
           <div className="flex flex-col justify-center items-center">
-          <h1 className="text-center font-bold text-4xl mt-4 mb-4">COLOR</h1>
+          <h1 className="text-center font-bold text-4xl mt-8 mb-4">COLOR</h1>
         
         
           <span

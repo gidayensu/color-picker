@@ -8,6 +8,7 @@ export default function TintShadeGenerator( {typeOfVariation} ) {
   const {colorDetails, copyToClipBoardHandler, wrongColorHandler, colorChoice}  = useContext(TintShadyContext)
   let tints = []
   let shades = []
+
   
   
   try {

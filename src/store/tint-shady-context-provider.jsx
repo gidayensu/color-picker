@@ -27,18 +27,17 @@ export default function TintShadyContextProvider ({children}) {
     if(typeof(color)==='string'&& color.includes('rgb')) {
         const rgb = color;
         const hex = '#' + rgb.slice(4,-1).split(',').map(x => (+x).toString(16).padStart(2,0)).join('');
-        setColorDetails(prevColorDetails=>({...prevColorDetails, color: hex}))  
+        setColorDetails(prevColorDetails=>({...prevColorDetails, color: hex, wrongColor: false}))  
     } else {
         
         if(color.hex) {
-        setColorDetails(prevColorDetails=>({...prevColorDetails, color: color.hex})) 
+        setColorDetails(prevColorDetails=>({...prevColorDetails, color: color.hex, wrongColor: false})) 
 } else {
     if (HEX_REGEX.test(color)) {
-      setColorDetails(prevColorDetails=>({...prevColorDetails, color: color})) 
         color.includes('#') ? 
-        setColorDetails(prevColorDetails=>({...prevColorDetails, color: color}))  
+        setColorDetails(prevColorDetails=>({...prevColorDetails, color: color, wrongColor: false}))  
         : 
-        setColorDetails(prevColorDetails=>({...prevColorDetails, color: '#'+color})) 
+        setColorDetails(prevColorDetails=>({...prevColorDetails, color: '#'+color, wrongColor: false})) 
         
     } else {
       setColorDetails(prevColorDetails=>({...prevColorDetails, wrongColor: true}))  

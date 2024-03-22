@@ -32,6 +32,15 @@ export default function Home() {
         setWrongPercent(true)
       }
     }
+
+    const colorChoiceCheck = (event)=> {
+        const enteredDetail = event.target.value;
+        if (enteredDetail.includes('rgb')) {
+          colorChoice('')
+        } else {
+          colorChoice(enteredDetail)
+        }
+    }
   
   return (
     <>
@@ -64,7 +73,7 @@ export default function Home() {
                 Choose Color
               </button>
               <div className="flex flex-row mb-5 md:mb-0 justify-center items-center  gap-3">
-              <input type="text" className={` ${colorDetails.wrongColor ? 'border-2 border-red-500' : 'border-2 border-teal-700'} mt-4 md:mt-0  h-12 w-52 rounded-lg p-5 tracking-widest`} defaultValue={colorDetails.color} placeholder="enter a color code" onChange={(event)=>colorChoice(event.target.value)}/>
+              <input type="text" className={` ${colorDetails.wrongColor ? 'border-2 border-red-500' : 'border-2 border-teal-700'} mt-4 md:mt-0  h-12 w-52 rounded-lg p-5 tracking-widest`} defaultValue={colorDetails.color} placeholder="enter a color code" onChange={colorChoiceCheck}/>
               {colorDetails.wrongColor && 
                 <div className="md:mb-4 mt-[95px] md:mr-36 mr-30  absolute flex flex-row"> 
                     <div className="w-1 h-5 bg-red-500">

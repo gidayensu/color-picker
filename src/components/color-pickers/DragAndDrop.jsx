@@ -48,7 +48,7 @@ export default function DragAndDrop() {
             />
             {!uploadedImage && <div> 
               
-              <div className="hidden mt-4 border-2 border-dashed border-slate-400 rounded-lg w-80 md:w-[800px] h-80 md:h-96 md:flex flex-col justify-center items-center cursor-pointer">
+              <div className="hidden mt-4 border-2 border-dashed border-slate-400 rounded-lg w-80 md:w-[800px] h-80 md:h-96 md:flex flex-col justify-center items-center cursor-pointer hover:bg-slate-400 hover:bg-opacity-45">
               <span className="flex items-center justify-center h-12 w-12 rounded-tl-lg rounded-bl-lg text-5xl"><FaFileUpload/></span>
               <p className="p-2 mt-4 font-bold">drag and drop your image file here</p>
               <p className="p-2 text-slate-400">Files supported are PNG, JPG, GIF</p>

@@ -10,7 +10,7 @@ import { LuCopy, LuCopyCheck } from "react-icons/lu";
 
 export default function Home() {
   const {
-    initialColor,    
+    
     imageUploaded,
     colorDetails, 
     choosingColorHandler, 
@@ -53,7 +53,7 @@ export default function Home() {
                 Choose Color
               </button>
               <div className="flex flex-row mb-5 md:mb-0 justify-center items-center  gap-3">
-              <input type="text" className={` ${colorDetails.wrongColor ? 'border-2 border-red-500' : 'border-2 border-teal-700'} mt-4 md:mt-0  h-12 w-52 rounded-lg p-5 tracking-widest`} defaultValue={colorDetails.color===initialColor ? "enter colour code" : colorDetails.color} placeholder="enter a colour code" onChange={(event)=>colorChoice(event.target.value)}/>
+              <input type="text" className={` ${colorDetails.wrongColor ? 'border-2 border-red-500' : 'border-2 border-teal-700'} mt-4 md:mt-0  h-12 w-52 rounded-lg p-5 tracking-widest`} defaultValue={colorDetails.color} placeholder="enter a color code" onChange={(event)=>colorChoice(event.target.value)}/>
               {colorDetails.wrongColor && 
                 <div className="md:-mt-[25px] mt-[95px] md:mr-0 mr-20  absolute flex flex-row"> 
                     <div className="w-1 h-5 bg-red-500">
@@ -62,8 +62,10 @@ export default function Home() {
                       <p>enter a correct hex color code</p>
                     </div>
                 </div>}
-                <input placeholder="%" defaultValue={`${colorDetails.tintShadePercent}%`} className=" text-center text-sm mt-4 w-16 h-12 rounded-lg border-2 border-teal-700" type="number" onChange={(event)=>tintShadePercentHandler(event.target.value)}/>
+                
+                <input value={colorDetails.tintShadePercent+'%'} className="text-center text-sm mt-4 md:w-32 w-16 h-12 rounded-lg border-2 border-teal-700" type="number" onChange={(event)=>tintShadePercentHandler(event.target.value)}/>
 
+                
                 
                 </div>
               <div className="hidden rounded-full w-12 h-12 shadow-sm" style={{
@@ -79,7 +81,7 @@ export default function Home() {
         {colorDetails.choosingColor && (
           <ColorPicker/>
         )}
-        {colorSelected() && (
+        
           <div className="flex flex-col justify-center items-center">
           <h1 className="text-center font-bold text-4xl mt-4 mb-4">COLOR</h1>
         
@@ -95,7 +97,7 @@ export default function Home() {
             {colorDetails.color === colorDetails.currentShadeOrTint ? <LuCopyCheck/> : <LuCopy/>}
           </span>
           </div>
-        )}
+        
         <Tints />
         <Shades/>
       </div>

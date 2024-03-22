@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
-import copyToClipBoard from "../components/common/copyToClipboard";
+import copyToClipBoard from "../components/common/copyToClipboard.js";
+import randomColor from './randomColor.jsx'
 
 const HEX_REGEX = /^#?([a-fA-F0-9]{3}|[a-fA-F0-9]{6})$/;
 
@@ -8,7 +9,7 @@ export const TintShadyContext = createContext(null);
 
 export default function TintShadyContextProvider ({children}) {
 
-  const initialColor = "#ffff";
+  const initialColor = randomColor();
   
   const [colorDetails, setColorDetails] = useState ({
     color: initialColor,
@@ -18,13 +19,6 @@ export default function TintShadyContextProvider ({children}) {
     wrongColor: null
   })
   const [imageUploaded, setImageUploaded] = useState(false); 
-  // const [color, setColor] = useState(initialColor);
-  // const [choosingColor, setChoosingColor] = useState(false);
-  
-  // const [currentShadeOrTint, setcurrentShadeOrTint] = useState('');
-  // const [tintShadePercent, setTintShadePercent] = useState(8);
-  // const [wrongColor, setWrongColor] = useState(false);
-  
   
   
  

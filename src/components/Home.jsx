@@ -90,7 +90,7 @@ export default function Home() {
                     <div className="w-1 h-5 bg-red-500">
                     </div>
                     <div className="flex items-center w-50 h-5 bg-red-200 text-[12px] text-red-500 font-bold tracking-wide p-2">
-                      <p>1 - 100</p>
+                      <p>1.00 - 100</p>
                     </div>
                 </div>}
                 

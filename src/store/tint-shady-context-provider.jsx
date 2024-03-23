@@ -1,6 +1,6 @@
 import { createContext, useState } from "react";
 import copyToClipBoard from "../components/common/copyToClipboard.js";
-import randomColor from './randomColor.jsx'
+import randomColor from '../components/common/randomColor.js'
 
 const HEX_REGEX = /^#?([a-fA-F0-9]{3}|[a-fA-F0-9]{6})$/;
 
@@ -26,7 +26,7 @@ export default function TintShadyContextProvider ({children}) {
     
     if(typeof(color)==='string'&& color.includes('rgb')) {
         const rgb = color;
-        const hex = '#' + rgb.slice(4,-1).split(',').map(x => (+x).toString(16).padStart(2,0)).join('');
+        const hex = '#' + rgb.slice(4,-1).split(',').map(x => (x).toString(16).padStart(2,0)).join('');
         setColorDetails(prevColorDetails=>({...prevColorDetails, color: hex, wrongColor: false}))  
     } else {
         

@@ -20,6 +20,8 @@ export default function TintShadeGenerator( {typeOfVariation} ) {
       
       return error;
   }
+
+  
   const currentVariation = typeOfVariation === 'SHADES' ? shades : tints;
   const variationShade = typeOfVariation === 'SHADES';
   

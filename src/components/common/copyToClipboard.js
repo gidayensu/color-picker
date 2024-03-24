@@ -1,6 +1,5 @@
-function copyToClipBoard (color) {
-    
+export function copyToClipBoard (color) {
     navigator.clipboard.writeText(color);
 }
 
-export default copyToClipBoard
+

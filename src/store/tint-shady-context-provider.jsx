@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
-import copyToClipBoard from "../components/common/copyToClipboard.js";
+import { copyColorToClipBoard } from "../components/common/colorFunctions.js";
+
 import {randomColor} from '../components/common/colorFunctions.js'
 
 const HEX_REGEX = /^#?([a-fA-F0-9]{3}|[a-fA-F0-9]{6})$/;
@@ -64,7 +65,7 @@ export default function TintShadyContextProvider ({children}) {
   }
 
   const copyToClipBoardHandler = (color) => {
-    copyToClipBoard(color);
+    copyColorToClipBoard(color);
     setColorDetails(prevColorDetails=> ({
       ...prevColorDetails, currentShadeOrTint: color}))
 }

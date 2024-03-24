@@ -14,7 +14,12 @@ export function rgbColorValidator (str) {
     }
     const [, r, g, b] = match.map(Number);
     
-    console.log(r >= 0 && r <= 255 && g >= 0 && g <= 255 && b >= 0 && b <= 255)
+    
     return (r >= 0 && r <= 255 && g >= 0 && g <= 255 && b >= 0 && b <= 255);
 }
+
+export function copyColorToClipBoard (color) {
+    navigator.clipboard.writeText(color);
+}
+
 

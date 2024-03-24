@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 import { copyColorToClipBoard } from "../components/common/colorFunctions.js";
 
 import {randomColor} from '../components/common/colorFunctions.js'
@@ -9,9 +9,8 @@ export const TintShadyContext = createContext(null);
 
 
 export default function TintShadyContextProvider ({children}) {
-
-  const initialColor = randomColor();
-  
+  const newRandomColor = randomColor();
+  const initialColor = localStorage.getItem("color") || newRandomColor;
   const [colorDetails, setColorDetails] = useState ({
     color: initialColor,
     choosingColor: false,
@@ -20,7 +19,13 @@ export default function TintShadyContextProvider ({children}) {
     wrongColor: null
   })
   const [imageUploaded, setImageUploaded] = useState(false); 
-  
+
+  useEffect(()=> {
+    if (colorDetails.color!==newRandomColor) {
+      localStorage.setItem('color', colorDetails.color)
+  }
+    
+  }, [colorDetails.color])
   
  
   const colorChoiceHandler = (color) => {

@@ -19,13 +19,14 @@ export default function TintShadyContextProvider ({children}) {
     wrongColor: null
   })
   const [imageUploaded, setImageUploaded] = useState(false); 
-
+  
   useEffect(()=> {
-    if (colorDetails.color!==newRandomColor) {
-      localStorage.setItem('color', colorDetails.color)
+    const color = colorDetails.color;
+    if (color!==newRandomColor) {
+      localStorage.setItem('color', color)
   }
     
-  }, [colorDetails.color])
+  }, [colorDetails, newRandomColor])
   
  
   const colorChoiceHandler = (color) => {
@@ -36,24 +37,26 @@ export default function TintShadyContextProvider ({children}) {
         const hex = '#' + rgb.slice(4,-1).split(',').map(x => (+x).toString(16).padStart(2,0)).join('');
       
         setColorDetails(prevColorDetails=>({...prevColorDetails, color: hex, wrongColor: false}))  
-    } else {
+    } 
         
-        if(color.hex) {
+    if(color.hex) {
+      
         setColorDetails(prevColorDetails=>({...prevColorDetails, color: color.hex, wrongColor: false})) 
-} else {
+} 
     if (HEX_REGEX.test(color)) {
+      
         color.includes('#') ? 
         setColorDetails(prevColorDetails=>({...prevColorDetails, color: color, wrongColor: false}))  
         : 
         setColorDetails(prevColorDetails=>({...prevColorDetails, color: '#'+color, wrongColor: false})) 
         
-    } else {
+    } 
+    if(!HEX_REGEX.test(color) && !color.hex && !(typeof(color)==='string'&& color.includes('rgb'))) {
       setColorDetails(prevColorDetails=>({...prevColorDetails, wrongColor: true}))  
     }
      
       
-}
-;}
+
   };
 
   const colorSelected = ()=> {

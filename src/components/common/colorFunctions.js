@@ -10,7 +10,7 @@ export function rgbColorValidator (str) {
     const match = str.match(rgbRegex);
     if (!match) {
         
-        return false; 
+        return false;
     }
     const [, r, g, b] = match.map(Number);
     

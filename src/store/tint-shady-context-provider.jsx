@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState, useMemo } from "react";
 import { copyColorToClipBoard, randomColor } from "../components/common/colorFunctions.js";
 import PropTypes from "prop-types";
-import { randomColor } from '../components/common/colorFunctions.js';
+
 
 const HEX_REGEX = /^#?([a-fA-F0-9]{3}|[a-fA-F0-9]{6})$/;
 

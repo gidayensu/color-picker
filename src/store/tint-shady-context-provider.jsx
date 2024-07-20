@@ -1,7 +1,7 @@
-import { createContext, useState, useEffect } from "react";
-import { copyColorToClipBoard } from "../components/common/colorFunctions.js";
-
-import {randomColor} from '../components/common/colorFunctions.js'
+import { createContext, useEffect, useState, useMemo } from "react";
+import { copyColorToClipBoard, randomColor } from "../components/common/colorFunctions.js";
+import PropTypes from "prop-types";
+import { randomColor } from '../components/common/colorFunctions.js';
 
 const HEX_REGEX = /^#?([a-fA-F0-9]{3}|[a-fA-F0-9]{6})$/;
 
@@ -60,7 +60,7 @@ export default function TintShadyContextProvider ({children}) {
   };
 
   const colorSelected = ()=> {
-    return colorDetails.color === initialColor ? false : true;
+    return colorDetails.color === initialColor 
   }
 
   const choosingColorHandler = () => {
@@ -91,19 +91,34 @@ const wrongColorHandler = (wrongColorStatus)=> {
     ...prevColorDetails, wrongColor: wrongColorStatus}))
 }
 
-const contextValue = {
-    initialColor,
-    imageUploaded,
-    colorDetails,
-    colorChoice: colorChoiceHandler,
-    colorSelected,
-    choosingColorHandler,
-    imageUploadedHandler,
-    copyToClipBoardHandler,
-    tintShadePercentHandler,
-    wrongColorHandler,
-}
+const contextValue = useMemo(()=> ({
+  initialColor,
+  imageUploaded,
+  colorDetails,
+  colorChoice: colorChoiceHandler,
+  colorSelected,
+  choosingColorHandler,
+  imageUploadedHandler,
+  copyToClipBoardHandler,
+  tintShadePercentHandler,
+  wrongColorHandler,
+}), [
+  initialColor,
+  imageUploaded,
+  colorDetails,
+  colorChoiceHandler,
+  colorSelected,
+  choosingColorHandler,
+  imageUploadedHandler,
+  copyToClipBoardHandler,
+  tintShadePercentHandler,
+  wrongColorHandler,
+]) 
   return <TintShadyContext.Provider value = {contextValue}>
     {children}
   </TintShadyContext.Provider>
+}
+
+TintShadyContext.propTypes = {
+  children: PropTypes.node.isRequired,
 }

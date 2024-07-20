@@ -1,11 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { LuCopy, LuCopyCheck } from "react-icons/lu";
+import { TintShadyContext } from "../store/tint-shady-context-provider.jsx";
 import ColorPicker from "./color-pickers/ColorPicker.jsx";
 import DragAndDrop from "./color-pickers/DragAndDrop.jsx";
-import Tints from "./Tints-and-shades/Tints.jsx";
 import Shades from "./Tints-and-shades/Shades.jsx";
-import { useContext } from "react";
-import { TintShadyContext } from "../store/tint-shady-context-provider.jsx";
-import { LuCopy, LuCopyCheck } from "react-icons/lu";
+import Tints from "./Tints-and-shades/Tints.jsx";
 
 import { rgbColorValidator } from "./common/colorFunctions.js";
 
@@ -41,12 +40,21 @@ export default function Home() {
     }
   };
 
+  const handleOnKeyDown = (e)=> {
+    {
+      if (e.key === 'Enter' || e.key === ' ') {
+        copyToClipBoardHandler(colorDetails.color);
+      }
+    }
+  }
+  
+
   return (
     <>
       <div className="flex justify-center items-center text-center">
         <p className="md:text-4xl w-[600px] m-8 text-2xl">
           <span className="font-bold text-teal-600"> Tints </span> and
-          <span className="font-bold text-teal-700"> Shades </span> of a{" "}
+          <span className="font-bold text-teal-700"> Shades </span> of a
           <span>Color </span>
         </p>
       </div>
@@ -129,6 +137,8 @@ export default function Home() {
 
           <div
             onClick={() => copyToClipBoardHandler(colorDetails.color)}
+            tabIndex = {0}
+            onKeyDown = {handleOnKeyDown}
             className="text-center p-8 h-44 cursor-pointer w-44"
             style={{
               backgroundColor: `${colorDetails.color}`,

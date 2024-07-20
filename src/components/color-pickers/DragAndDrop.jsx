@@ -1,14 +1,14 @@
-import { FaFileUpload } from "react-icons/fa";
-import { useState, useCallback } from "react";
+import { useCallback, useContext, useState } from "react";
 import { useDropzone } from "react-dropzone";
+import { FaFileUpload } from "react-icons/fa";
 import { ImageColorPicker } from "react-image-color-picker";
-import { useContext } from "react";
 import { TintShadyContext } from "../../store/tint-shady-context-provider";
 
 export default function DragAndDrop() {
   const {colorChoice, imageUploadedHandler} = useContext(TintShadyContext);
 
-  const [uploadedImage, setUpLoadedImage] = useState(null);
+  const [uploadedImage, setUploadedImage] = useState(null);
+
   const onDrop = useCallback((acceptedFile) => {
     acceptedFile.forEach((file) => {
       const reader = new FileReader();
@@ -17,7 +17,7 @@ export default function DragAndDrop() {
       reader.onerror = () => console.log("file reading has failed");
       reader.onload = () => {
         // Do whatever you want with the file contents
-        setUpLoadedImage(reader.result);
+        setUploadedImage(reader.result);
         imageUploadedHandler(true);
       };
       reader.readAsDataURL(file);
@@ -32,12 +32,11 @@ export default function DragAndDrop() {
   }, onDrop });
 
   const handleRemovePicture = () => {
-    setUpLoadedImage(null);
+    setUploadedImage(null);
     imageUploadedHandler(false)
   };
 
   return (
-    <>
       <div className="flex flex-col justify-center items-center">
           <div
             style={{}}
@@ -87,6 +86,6 @@ export default function DragAndDrop() {
           </button>
         )}
       </div>
-    </>
+
   )
 }

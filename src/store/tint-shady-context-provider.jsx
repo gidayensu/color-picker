@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState, useMemo } from "react";
+import { createContext, useEffect, useState, useMemo, useCallback } from "react";
 import { copyColorToClipBoard, randomColor } from "../components/common/colorFunctions.js";
 import PropTypes from "prop-types";
 
@@ -7,7 +7,9 @@ const HEX_REGEX = /^#?([a-fA-F0-9]{3}|[a-fA-F0-9]{6})$/;
 
 export const TintShadyContext = createContext(null);
 
-
+TintShadyContext.propTypes = {
+  children: PropTypes.node.isRequired,
+}
 export default function TintShadyContextProvider ({children}) {
   const newRandomColor = randomColor();
   const initialColor = localStorage.getItem("color") || newRandomColor;
@@ -29,7 +31,7 @@ export default function TintShadyContextProvider ({children}) {
   }, [colorDetails, newRandomColor])
   
  
-  const colorChoiceHandler = (color) => {
+  const colorChoiceHandler = useCallback((color) => {
     
     if(typeof(color)==='string'&& color.includes('rgb')) {
       
@@ -57,39 +59,39 @@ export default function TintShadyContextProvider ({children}) {
      
       
 
-  };
+  }, []);
 
-  const colorSelected = ()=> {
+  const colorSelected = useCallback(()=> {
     return colorDetails.color === initialColor 
-  }
+  }, [colorDetails, initialColor])
 
-  const choosingColorHandler = () => {
+  const choosingColorHandler = useCallback(() => {
     setColorDetails(prevColorDetails=> ({
       ...prevColorDetails, choosingColor: !colorDetails.choosingColor}))
-  };
+  }, [colorDetails]);
 
-  const imageUploadedHandler = ()=> {
+  const imageUploadedHandler = useCallback(()=> {
     setImageUploaded(()=>!imageUploaded)
-  }
+  }, [imageUploaded])
 
-  const copyToClipBoardHandler = (color) => {
+  const copyToClipBoardHandler = useCallback((color) => {
     copyColorToClipBoard(color);
     setColorDetails(prevColorDetails=> ({
       ...prevColorDetails, currentShadeOrTint: color}))
-}
+}, [])
 
-  const tintShadePercentHandler = (percent) => {
+  const tintShadePercentHandler = useCallback((percent) => {
     const numberPercent = parseFloat(percent)
     setColorDetails(prevColorDetails=> ({
       ...prevColorDetails, tintShadePercent: numberPercent}))
     
-}
+}, [setColorDetails])
     
     
-const wrongColorHandler = (wrongColorStatus)=> {
+const wrongColorHandler = useCallback((wrongColorStatus)=> {
   setColorDetails(prevColorDetails=> ({
     ...prevColorDetails, wrongColor: wrongColorStatus}))
-}
+}, [setColorDetails])
 
 const contextValue = useMemo(()=> ({
   initialColor,
@@ -119,6 +121,3 @@ const contextValue = useMemo(()=> ({
   </TintShadyContext.Provider>
 }
 
-TintShadyContext.propTypes = {
-  children: PropTypes.node.isRequired,
-}

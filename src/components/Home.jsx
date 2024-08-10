@@ -51,11 +51,11 @@ export default function Home() {
 
   return (
     <>
-      <div className="flex justify-center items-center text-center">
+      <div className="flex justify-center items-center text-center ">
         <p className="md:text-4xl w-[600px] m-8 text-2xl">
           <span className="font-bold text-teal-600"> Tints </span> and
           <span className="font-bold text-teal-700"> Shades </span> of a
-          <span>Color </span>
+          <span> Color </span>
         </p>
       </div>
       <div className="grid justify-center items-center">
@@ -139,14 +139,14 @@ export default function Home() {
             onClick={() => copyToClipBoardHandler(colorDetails.color)}
             tabIndex = {0}
             onKeyDown = {handleOnKeyDown}
-            className="text-center p-8 h-44 cursor-pointer w-44"
+            className="text-center p-8 h-44 cursor-pointer w-44 "
             style={{
               backgroundColor: `${colorDetails.color}`,
             }}
           >
             {colorDetails.color.toUpperCase()}
             {
-                <div className="flex justify-center items-center gap-4 text-2xl cursor-pointer">             
+                <div className="flex justify-center items-center gap-4 text-2xl cursor-pointer ">             
                     {colorDetails.color === colorDetails.currentShadeOrTint ? 
                             
                     <div className="flex justify-center items-center rounded-full hover:bg-black hover:bg-opacity-10 w-10 h-10">
@@ -163,9 +163,11 @@ export default function Home() {
             
           </div>
         </div>
+            <div className="flex flex-col items-center justify-center w-full">
 
         <Tints />
         <Shades />
+            </div>
       </div>
     </>
   );

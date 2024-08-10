@@ -38,7 +38,7 @@ export default function TintShadeGenerator({ typeOfVariation }) {
   }
 
   return (
-    <div className="mb-4 w-[90vw] flex flex-col justify-center">
+    <div className="mb-4 md:w-[90vw] flex flex-col justify-center w-full">
       <h1 className="text-4xl font-bold my-8 text-center">{typeOfVariation}</h1>
       <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
         {currentVariation.map((variation) => (
